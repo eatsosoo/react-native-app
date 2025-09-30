@@ -1,0 +1,16 @@
+{
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "back": "Back"
+  },
+  "tabs": {
+    "one": "Tab One",
+    "two": "Tab Two"
+  },
+  "home": {
+    "hello": "Hello"
+  }
+}
+
+

@@ -1,0 +1,16 @@
+{
+  "common": {
+    "ok": "Đồng ý",
+    "cancel": "Hủy",
+    "back": "Quay lại"
+  },
+  "tabs": {
+    "one": "Tab 1",
+    "two": "Tab 2"
+  },
+  "home": {
+    "hello": "Xin chào"
+  }
+}
+
+

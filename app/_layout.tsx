@@ -3,10 +3,12 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
+import { ThemeProvider as AppThemeProvider } from '@/theme';
+import { initI18n } from '@/i18n';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -26,6 +28,7 @@ export default function RootLayout() {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     ...FontAwesome.font,
   });
+  const [i18nReady, setI18nReady] = useState(false);
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
@@ -33,12 +36,24 @@ export default function RootLayout() {
   }, [error]);
 
   useEffect(() => {
-    if (loaded) {
+    (async () => {
+      try {
+        await initI18n();
+        setI18nReady(true);
+      } catch (e) {
+        console.error('i18n init error', e);
+        setI18nReady(true);
+      }
+    })();
+  }, []);
+
+  useEffect(() => {
+    if (loaded && i18nReady) {
       SplashScreen.hideAsync();
     }
-  }, [loaded]);
+  }, [loaded, i18nReady]);
 
-  if (!loaded) {
+  if (!loaded || !i18nReady) {
     return null;
   }
 
@@ -49,11 +64,13 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
+    <AppThemeProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+        </Stack>
+      </ThemeProvider>
+    </AppThemeProvider>
   );
 }
