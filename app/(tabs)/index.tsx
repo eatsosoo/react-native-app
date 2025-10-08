@@ -64,7 +64,9 @@ export default function TabOneScreen() {
         <Link href="/add-transaction" asChild style={styles.actionItem}>
           <Button title={ t('home.actions.new_transaction') } variant="ghost" />
         </Link>
-        <Button title={ t('home.actions.new_budget') } variant="ghost" style={styles.actionItem} />
+        <Link href="/new-budget" asChild style={styles.actionItem}>
+          <Button title={ t('home.actions.new_budget') } variant="ghost" style={styles.actionItem} />
+        </Link>
       </View>
     </View>
   );
