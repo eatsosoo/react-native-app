@@ -5,8 +5,8 @@
     "back": "Quay lại"
   },
   "tabs": {
-    "one": "Tab 1",
-    "two": "Tab 2",
+    "home": "Trang chủ",
+    "two": "Giao dịch",
     "settings": "Cài đặt"
   },
   "home": {
@@ -25,6 +25,14 @@
       "dark": "Tối",
       "system": "Hệ thống"
     }
+  },
+  "transaction": {
+    "add": "Thêm giao dịch",
+    "income": "Thu nhập",
+    "expense": "Chi tiêu",
+    "note": "Ghi chú",
+    "amount": "Số tiền",
+    "clear": "AC"
   }
 }
 

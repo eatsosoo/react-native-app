@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
 import { ThemeProvider as AppThemeProvider, useAppTheme } from '@/theme';
+import { TransactionProvider } from '@/contexts/TransactionContext';
 import { initI18n } from '@/i18n';
 
 export {
@@ -63,12 +64,15 @@ export default function RootLayout() {
 function RootLayoutNav() {
   return (
     <AppThemeProvider>
-      <NavigationThemeProvider>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-        </Stack>
-      </NavigationThemeProvider>
+      <TransactionProvider>
+        <NavigationThemeProvider>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="add-transaction" options={{ presentation: 'modal' }} />
+          </Stack>
+        </NavigationThemeProvider>
+      </TransactionProvider>
     </AppThemeProvider>
   );
 }
