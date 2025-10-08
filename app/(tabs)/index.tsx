@@ -8,6 +8,7 @@ import { useAppTheme } from '@/theme';
 import { useTransactions } from '@/contexts/TransactionContext';
 import Colors from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
+import Button from '@/components/ui/Button';
 
 export default function TabOneScreen() {
   const { theme } = useAppTheme();
@@ -24,13 +25,16 @@ export default function TabOneScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Finance Tracker</Text>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <Text style={[styles.title, { color: theme.primary }]}>Finance Tracker</Text>
 
       <View style={[styles.balanceContainer, { backgroundColor: theme.surface }]}>
         <Text style={[styles.balanceLabel, { color: theme.muted }]}>Balance</Text>
-        <Text style={[styles.balanceAmount, { color: balance >= 0 ? theme.success : theme.danger }]}>
-          {balance >= 0 ? '+' : ''}{formatAmount(balance)}đ
+        <Text
+          style={[styles.balanceAmount, { color: balance >= 0 ? theme.success : theme.danger }]}
+        >
+          {balance >= 0 ? '+' : ''}
+          {formatAmount(balance)}đ
         </Text>
       </View>
 
@@ -54,19 +58,12 @@ export default function TabOneScreen() {
       {/* <EditScreenInfo path="app/(tabs)/index.tsx" /> */}
 
       {/* Floating Action Button */}
-      <Link href="/add-transaction" asChild>
-        <Pressable style={({ pressed }) => [
-          styles.button,
-          {
-            opacity: pressed ? 0.8 : 1,
-            backgroundColor: theme.primary,
-            borderColor: theme.primary
-          }
-        ]}>
-          <Ionicons name="add" size={22} color={theme.primaryForeground} style={styles.icon} />
-          <Text style={[styles.label, { color: theme.primaryForeground }]}>New Transaction</Text>
-        </Pressable>
-      </Link>
+      <View style={[styles.actionContainer, { backgroundColor: theme.background }]}>
+        <Link href="/add-transaction" asChild style={styles.actionItem}>
+          <Button title="New Transaction" variant="ghost" />
+        </Link>
+        <Button title="New Budget" variant="ghost" style={styles.actionItem} />
+      </View>
     </View>
   );
 }
@@ -76,7 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingTop: 60,
+    paddingTop: 30,
   },
   title: {
     fontSize: 24,
@@ -84,7 +81,6 @@ const styles = StyleSheet.create({
     marginBottom: 30,
   },
   balanceContainer: {
-    width: '90%',
     padding: 20,
     borderRadius: 16,
     alignItems: 'center',
@@ -101,16 +97,18 @@ const styles = StyleSheet.create({
   },
   summaryContainer: {
     flexDirection: 'row',
-    width: '90%',
+    // paddingHorizontal: 20,
     justifyContent: 'space-between',
-    marginBottom: 20,
+    // marginBottom: 20,
+    marginHorizontal: 20,
+    backgroundColor: 'transparent',
+    gap: 12,
   },
   summaryItem: {
     flex: 1,
     padding: 16,
     borderRadius: 12,
     alignItems: 'center',
-    marginHorizontal: 5,
     // Removed elevation and shadow properties for web compatibility
   },
   summaryLabel: {
@@ -124,35 +122,15 @@ const styles = StyleSheet.create({
   separator: {
     marginVertical: 30,
     height: 1,
-    width: '80%',
+    width: '90%',
   },
-  fab: {
-    position: 'absolute',
-    bottom: 30,
-    right: 30,
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    justifyContent: 'center',
-    alignItems: 'center',
-    // Removed elevation and shadow properties for web compatibility
-  },
-  button: {
+  actionContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    marginHorizontal: 20,
-    marginTop: 20,
+    justifyContent: 'flex-start',
+    width: '90%',
+    gap: 12,
   },
-  icon: {
-    marginRight: 6,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: '600',
+  actionItem: {
+    // width: '50%'
   },
 });

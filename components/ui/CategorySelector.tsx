@@ -57,22 +57,22 @@ export function CategorySelector({ selectedCategory, onCategorySelect, categorie
 const styles = StyleSheet.create({
   container: {
     marginHorizontal: 20,
-    marginBottom: 20,
+    // marginBottom: 20,
   },
   scrollContent: {
     paddingHorizontal: 0,
   },
   categoryButton: {
-    paddingVertical: 12,
+    paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 20,
     borderWidth: 1,
-    marginRight: 12,
-    minWidth: 80,
+    marginRight: 8,
+    // minWidth: 80,
     alignItems: 'center',
   },
   categoryText: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '500',
   },
 });

@@ -91,11 +91,6 @@ export default function AddTransactionScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-        {/* Header */}
-        <Text style={[styles.title, { color: theme.text }]}>
-          {t('transaction.add')}
-        </Text>
-
         {/* Tab Switcher */}
         <TabSwitcher
           tabs={tabs}
@@ -179,13 +174,6 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 20,
-    marginBottom: 0,
-  },
   amountContainer: {
     flex: 1,
     alignItems: 'center',
@@ -240,6 +228,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     paddingVertical: 16,
     alignItems: 'center',
+    marginBottom: 20,
     // Removed elevation and shadow properties for web compatibility
   },
   saveButtonText: {

@@ -13,7 +13,7 @@ export function NumericKeypad({ onKeyPress }: NumericKeypadProps) {
     ['1', '2', '3'],
     ['4', '5', '6'],
     ['7', '8', '9'],
-    ['AC', '0', ''],
+    ['AC', '0', '000'],
   ];
 
   const renderKey = (key: string, index: number) => {

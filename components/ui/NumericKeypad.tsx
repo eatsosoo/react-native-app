@@ -13,7 +13,7 @@ export function NumericKeypad({ onKeyPress }: NumericKeypadProps) {
     ['1', '2', '3'],
     ['4', '5', '6'],
     ['7', '8', '9'],
-    ['AC', '0', ''],
+    ['AC', '0', '000'],
   ];
 
   const renderKey = (key: string, index: number) => {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 12,
-    gap: 12,
+    gap: 8,
   },
   keyContainer: {
     flex: 1,
