@@ -6,10 +6,25 @@
   },
   "tabs": {
     "one": "Tab One",
-    "two": "Tab Two"
+    "two": "Tab Two",
+    "settings": "Settings"
   },
   "home": {
     "hello": "Hello"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": {
+      "title": "Language",
+      "english": "English",
+      "vietnamese": "Tiếng Việt"
+    },
+    "theme": {
+      "title": "Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
   }
 }
 

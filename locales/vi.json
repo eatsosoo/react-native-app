@@ -6,10 +6,25 @@
   },
   "tabs": {
     "one": "Tab 1",
-    "two": "Tab 2"
+    "two": "Tab 2",
+    "settings": "Cài đặt"
   },
   "home": {
     "hello": "Xin chào"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "language": {
+      "title": "Ngôn ngữ",
+      "english": "English",
+      "vietnamese": "Tiếng Việt"
+    },
+    "theme": {
+      "title": "Giao diện",
+      "light": "Sáng",
+      "dark": "Tối",
+      "system": "Hệ thống"
+    }
   }
 }
 

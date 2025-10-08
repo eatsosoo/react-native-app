@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
-import { ThemeProvider as AppThemeProvider } from '@/theme';
+import { ThemeProvider as AppThemeProvider, useAppTheme } from '@/theme';
 import { initI18n } from '@/i18n';
 
 export {
@@ -61,16 +61,24 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
   return (
     <AppThemeProvider>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <NavigationThemeProvider>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         </Stack>
-      </ThemeProvider>
+      </NavigationThemeProvider>
     </AppThemeProvider>
+  );
+}
+
+function NavigationThemeProvider({ children }: { children: React.ReactNode }) {
+  const { colorScheme } = useAppTheme();
+
+  return (
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      {children}
+    </ThemeProvider>
   );
 }
