@@ -7,11 +7,12 @@ export interface Transaction {
   amount: number;
   note: string;
   date: Date;
+  category?: 'shopping' | 'healthcare' | 'foods' | 'entertainment' | null;
 }
 
 interface TransactionContextValue {
   transactions: Transaction[];
-  addTransaction: (transaction: Omit<Transaction, 'id' | 'date'>) => void;
+  addTransaction: (transaction: Omit<Transaction, 'id'>) => void;
   deleteTransaction: (id: string) => void;
   getTotalIncome: () => number;
   getTotalExpense: () => number;
@@ -65,11 +66,10 @@ export function TransactionProvider({ children }: { children: React.ReactNode })
     }
   }, [transactions]);
 
-  const addTransaction = (transactionData: Omit<Transaction, 'id' | 'date'>) => {
+  const addTransaction = (transactionData: Omit<Transaction, 'id'>) => {
     const newTransaction: Transaction = {
       ...transactionData,
       id: Date.now().toString(),
-      date: new Date(),
     };
     setTransactions(prev => [newTransaction, ...prev]);
   };

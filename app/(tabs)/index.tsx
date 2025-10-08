@@ -57,10 +57,14 @@ export default function TabOneScreen() {
       <Link href="/add-transaction" asChild>
         <Pressable style={({ pressed }) => [
           styles.button,
-          { opacity: pressed ? 0.5 : 1 }
+          {
+            opacity: pressed ? 0.8 : 1,
+            backgroundColor: theme.primary,
+            borderColor: theme.primary
+          }
         ]}>
-          {/* <Ionicons name="add" size={22} color="#000" style={styles.icon} /> */}
-          <Text style={styles.label}>New Transaction</Text>
+          <Ionicons name="add" size={22} color={theme.primaryForeground} style={styles.icon} />
+          <Text style={[styles.label, { color: theme.primaryForeground }]}>New Transaction</Text>
         </Pressable>
       </Link>
     </View>
@@ -134,22 +138,21 @@ const styles = StyleSheet.create({
     // Removed elevation and shadow properties for web compatibility
   },
   button: {
-    flexDirection: 'row',          // 🔹 Icon + Text cùng hàng
-    alignItems: 'center',          // 🔹 Căn giữa theo chiều dọc
-    justifyContent: 'center',      // 🔹 (tuỳ chọn) căn giữa ngang
-    borderWidth: 1,                // 🔹 Viền
-    borderColor: '#ccc',           // 🔹 Màu viền
-    borderRadius: 8,               // 🔹 Bo góc
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    backgroundColor: '#fff',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderRadius: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    marginHorizontal: 20,
+    marginTop: 20,
   },
   icon: {
     marginRight: 6,
   },
   label: {
     fontSize: 16,
-    color: '#000',
-    fontWeight: '500',
+    fontWeight: '600',
   },
 });

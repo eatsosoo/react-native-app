@@ -32,7 +32,15 @@
     "expense": "Chi tiêu",
     "note": "Ghi chú",
     "amount": "Số tiền",
-    "clear": "AC"
+    "clear": "AC",
+    "date": "Ngày",
+    "category": "Danh mục",
+    "categories": {
+      "shopping": "Mua sắm",
+      "healthcare": "Chăm sóc sức khỏe",
+      "foods": "Thực phẩm",
+      "entertainment": "Giải trí"
+    }
   }
 }
 

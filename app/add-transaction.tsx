@@ -6,6 +6,8 @@ import { useAppTheme } from '@/theme';
 import { useTransactions } from '@/contexts/TransactionContext';
 import { TabSwitcher } from '@/components/ui/TabSwitcher';
 import { NumericKeypad } from '@/components/ui/NumericKeypad';
+import { DatePicker } from '@/components/ui/DatePicker';
+import { CategorySelector, Category } from '@/components/ui/CategorySelector';
 
 type TransactionType = 'income' | 'expense';
 
@@ -18,9 +20,18 @@ export default function AddTransactionScreen() {
   const [activeTab, setActiveTab] = useState(0);
   const [amount, setAmount] = useState('0');
   const [note, setNote] = useState('');
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
   const transactionType: TransactionType = activeTab === 0 ? 'income' : 'expense';
   const tabs = [t('transaction.income'), t('transaction.expense')];
+
+  const categories = [
+    { key: 'shopping' as Category, label: t('transaction.categories.shopping') },
+    { key: 'healthcare' as Category, label: t('transaction.categories.healthcare') },
+    { key: 'foods' as Category, label: t('transaction.categories.foods') },
+    { key: 'entertainment' as Category, label: t('transaction.categories.entertainment') },
+  ];
 
   const handleKeyPress = (key: string) => {
     if (key === 'AC') {
@@ -63,11 +74,15 @@ export default function AddTransactionScreen() {
       type: transactionType,
       amount: amountValue,
       note: note.trim(),
+      date: selectedDate,
+      category: selectedCategory,
     });
 
     // Reset form
     setAmount('0');
     setNote('');
+    setSelectedDate(new Date());
+    setSelectedCategory(null);
     setActiveTab(0);
 
     // Navigate back
@@ -76,7 +91,6 @@ export default function AddTransactionScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Header */}
         <Text style={[styles.title, { color: theme.text }]}>
           {t('transaction.add')}
@@ -92,7 +106,7 @@ export default function AddTransactionScreen() {
         {/* Amount Display */}
         <View style={styles.amountContainer}>
           <Text style={[styles.amountText, { color: getAmountColor() }]}>
-            {getAmountPrefix()}{formatAmount(amount)}đ
+            {getAmountPrefix()}{formatAmount(amount)}
           </Text>
         </View>
 
@@ -119,6 +133,26 @@ export default function AddTransactionScreen() {
           />
         </View>
 
+        {/* Date Picker */}
+        {/* <View style={styles.dateContainer}>
+          <Text style={[styles.dateLabel, { color: theme.text }]}>
+            {t('transaction.date')}
+          </Text>
+          <DatePicker date={selectedDate} onDateChange={setSelectedDate} />
+        </View> */}
+
+        {/* Category Selector */}
+        <View style={styles.categoryContainer}>
+          <Text style={[styles.categoryLabel, { color: theme.text }]}>
+            {t('transaction.category')}
+          </Text>
+          <CategorySelector
+            selectedCategory={selectedCategory}
+            onCategorySelect={setSelectedCategory}
+            categories={categories}
+          />
+        </View>
+
         {/* Numeric Keypad */}
         <NumericKeypad onKeyPress={handleKeyPress} />
 
@@ -134,7 +168,6 @@ export default function AddTransactionScreen() {
             </Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
     </View>
   );
 }
@@ -151,11 +184,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginTop: 20,
-    marginBottom: 10,
+    marginBottom: 0,
   },
   amountContainer: {
+    flex: 1,
     alignItems: 'center',
-    marginVertical: 30,
+    justifyContent: 'center',
     paddingHorizontal: 20,
   },
   amountText: {
@@ -165,7 +199,7 @@ const styles = StyleSheet.create({
   },
   noteContainer: {
     marginHorizontal: 20,
-    marginBottom: 30,
+    marginBottom: 10,
   },
   noteLabel: {
     fontSize: 16,
@@ -180,10 +214,27 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
     minHeight: 80,
   },
+  dateContainer: {
+    marginHorizontal: 20,
+    marginBottom: 20,
+  },
+  dateLabel: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 8,
+  },
+  categoryContainer: {
+    marginBottom: 10,
+  },
+  categoryLabel: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 8,
+    marginHorizontal: 20,
+  },
   saveContainer: {
     marginHorizontal: 20,
-    marginTop: 20,
-    marginBottom: 40,
+    marginBottom: 10,
   },
   saveButton: {
     borderRadius: 12,

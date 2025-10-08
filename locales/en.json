@@ -32,7 +32,15 @@
     "expense": "Expense",
     "note": "Note",
     "amount": "Amount",
-    "clear": "AC"
+    "clear": "AC",
+    "date": "Date",
+    "category": "Category",
+    "categories": {
+      "shopping": "Shopping",
+      "healthcare": "Healthcare",
+      "foods": "Foods",
+      "entertainment": "Entertainment"
+    }
   }
 }
 

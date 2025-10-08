@@ -21,28 +21,26 @@ export function NumericKeypad({ onKeyPress }: NumericKeypadProps) {
       return <View key={index} style={styles.keyContainer} />;
     }
 
-    const keyButtonStyle = [
-      styles.keyContainer,
-      styles.keyButton,
-      { backgroundColor: theme.surface, borderColor: theme.border }
-    ];
-
-    const keyTextStyle = [
-      styles.keyText,
-      {
-        color: key === 'AC' ? theme.danger : theme.text,
-        fontWeight: key === 'AC' ? '600' as const : '500' as const
-      }
-    ];
-
     return (
       <TouchableOpacity
         key={index}
-        style={keyButtonStyle}
+        style={[
+          styles.keyContainer,
+          styles.keyButton,
+          { backgroundColor: theme.surface, borderColor: theme.border }
+        ]}
         onPress={() => onKeyPress(key)}
         activeOpacity={0.7}
       >
-        <Text style={keyTextStyle}>
+        <Text
+          style={[
+            styles.keyText,
+            {
+              color: key === 'AC' ? theme.danger : theme.text,
+              fontWeight: key === 'AC' ? '600' : '500'
+            }
+          ]}
+        >
           {key}
         </Text>
       </TouchableOpacity>
@@ -69,9 +67,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 12,
+    gap: 12,
   },
   keyContainer: {
-    width: 80,
+    flex: 1,
     height: 60,
     borderRadius: 12,
     justifyContent: 'center',
@@ -79,7 +78,7 @@ const styles = StyleSheet.create({
   },
   keyButton: {
     borderWidth: 1,
-    // Removed elevation and shadow properties for web compatibility
+    // Remove elevation and shadow for web compatibility
   },
   keyText: {
     fontSize: 24,

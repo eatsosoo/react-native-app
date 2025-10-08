@@ -67,9 +67,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 12,
+    gap: 12,
   },
   keyContainer: {
-    width: 80,
+    flex: 1,
     height: 60,
     borderRadius: 12,
     justifyContent: 'center',
