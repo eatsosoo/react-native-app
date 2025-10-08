@@ -10,7 +10,14 @@
     "settings": "Cài đặt"
   },
   "home": {
-    "hello": "Xin chào"
+    "hello": "Xin chào",
+    "balance": "Số dư",
+    "income": "Thu nhập",
+    "expense": "Chi tiêu",
+    "actions": {
+      "new_transaction": "Giao dịch mới",
+      "new_budget": "Thêm ngân sách"
+    }
   },
   "settings": {
     "title": "Cài đặt",

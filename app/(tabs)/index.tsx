@@ -9,8 +9,10 @@ import { useTransactions } from '@/contexts/TransactionContext';
 import Colors from '@/constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import Button from '@/components/ui/Button';
+import { useTranslation } from 'react-i18next';
 
 export default function TabOneScreen() {
+  const { t } = useTranslation();
   const { theme } = useAppTheme();
   const colorScheme = useColorScheme();
 
@@ -29,7 +31,7 @@ export default function TabOneScreen() {
       <Text style={[styles.title, { color: theme.primary }]}>Finance Tracker</Text>
 
       <View style={[styles.balanceContainer, { backgroundColor: theme.surface }]}>
-        <Text style={[styles.balanceLabel, { color: theme.muted }]}>Balance</Text>
+        <Text style={[styles.balanceLabel, { color: theme.muted }]}>{ t('home.balance') }</Text>
         <Text
           style={[styles.balanceAmount, { color: balance >= 0 ? theme.success : theme.danger }]}
         >
@@ -41,13 +43,13 @@ export default function TabOneScreen() {
       {/* Income/Expense Summary */}
       <View style={styles.summaryContainer}>
         <View style={[styles.summaryItem, { backgroundColor: theme.surface }]}>
-          <Text style={[styles.summaryLabel, { color: theme.muted }]}>Income</Text>
+          <Text style={[styles.summaryLabel, { color: theme.muted }]}>{ t('home.income') }</Text>
           <Text style={[styles.summaryAmount, { color: theme.success }]}>
             +{formatAmount(income)}đ
           </Text>
         </View>
         <View style={[styles.summaryItem, { backgroundColor: theme.surface }]}>
-          <Text style={[styles.summaryLabel, { color: theme.muted }]}>Expense</Text>
+          <Text style={[styles.summaryLabel, { color: theme.muted }]}>{ t('home.expense') }</Text>
           <Text style={[styles.summaryAmount, { color: theme.danger }]}>
             -{formatAmount(expense)}đ
           </Text>
@@ -60,9 +62,9 @@ export default function TabOneScreen() {
       {/* Floating Action Button */}
       <View style={[styles.actionContainer, { backgroundColor: theme.background }]}>
         <Link href="/add-transaction" asChild style={styles.actionItem}>
-          <Button title="New Transaction" variant="ghost" />
+          <Button title={ t('home.actions.new_transaction') } variant="ghost" />
         </Link>
-        <Button title="New Budget" variant="ghost" style={styles.actionItem} />
+        <Button title={ t('home.actions.new_budget') } variant="ghost" style={styles.actionItem} />
       </View>
     </View>
   );

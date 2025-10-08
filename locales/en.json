@@ -10,7 +10,14 @@
     "settings": "Settings"
   },
   "home": {
-    "hello": "Hello"
+    "hello": "Hello",
+    "balance": "Balance",
+    "income": "Income",
+    "expense": "Expense",
+    "actions": {
+      "new_transaction": "New Transaction",
+      "new_budget": "New Budget"
+    }
   },
   "settings": {
     "title": "Settings",
