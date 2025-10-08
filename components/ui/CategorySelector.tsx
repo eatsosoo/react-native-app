@@ -40,7 +40,7 @@ export function CategorySelector({ selectedCategory, onCategorySelect, categorie
                 style={[
                   styles.categoryText,
                   {
-                    color: isSelected ? theme.primaryForeground : theme.text
+                    color: isSelected ? theme.primaryForeground : theme.secondary
                   }
                 ]}
               >
@@ -56,7 +56,7 @@ export function CategorySelector({ selectedCategory, onCategorySelect, categorie
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
+    // marginHorizontal: 20,
     // marginBottom: 20,
   },
   scrollContent: {

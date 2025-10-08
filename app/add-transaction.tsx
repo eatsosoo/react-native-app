@@ -213,12 +213,12 @@ const styles = StyleSheet.create({
   },
   categoryContainer: {
     marginBottom: 10,
+    marginHorizontal: 20,
   },
   categoryLabel: {
     fontSize: 16,
     fontWeight: '600',
     marginBottom: 8,
-    marginHorizontal: 20,
   },
   saveContainer: {
     marginHorizontal: 20,
