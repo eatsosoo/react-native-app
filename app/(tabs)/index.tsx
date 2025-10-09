@@ -36,7 +36,7 @@ export default function TabOneScreen() {
           style={[styles.balanceAmount, { color: balance >= 0 ? theme.success : theme.danger }]}
         >
           {balance >= 0 ? '+' : ''}
-          {formatAmount(balance)}đ
+          {formatAmount(balance)}₫
         </Text>
       </View>
 
@@ -45,13 +45,13 @@ export default function TabOneScreen() {
         <View style={[styles.summaryItem, { backgroundColor: theme.surface }]}>
           <Text style={[styles.summaryLabel, { color: theme.muted }]}>{ t('home.income') }</Text>
           <Text style={[styles.summaryAmount, { color: theme.success }]}>
-            +{formatAmount(income)}đ
+            +{formatAmount(income)}₫
           </Text>
         </View>
         <View style={[styles.summaryItem, { backgroundColor: theme.surface }]}>
           <Text style={[styles.summaryLabel, { color: theme.muted }]}>{ t('home.expense') }</Text>
           <Text style={[styles.summaryAmount, { color: theme.danger }]}>
-            -{formatAmount(expense)}đ
+            -{formatAmount(expense)}₫
           </Text>
         </View>
       </View>
@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 16,
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 12,
+    width: '90%',
     // Removed elevation and shadow properties for web compatibility
   },
   balanceLabel: {
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     // marginBottom: 20,
     marginHorizontal: 20,
+    width: '90%',
     backgroundColor: 'transparent',
     gap: 12,
   },

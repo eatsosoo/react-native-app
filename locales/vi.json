@@ -7,7 +7,8 @@
   "tabs": {
     "home": "Trang chủ",
     "two": "Giao dịch",
-    "settings": "Cài đặt"
+    "settings": "Cài đặt",
+    "budget": "Ngân sách"
   },
   "home": {
     "hello": "Xin chào",
@@ -41,13 +42,23 @@
     "amount": "Số tiền",
     "clear": "AC",
     "date": "Ngày",
-    "category": "Danh mục",
-    "categories": {
-      "shopping": "Mua sắm",
-      "healthcare": "Chăm sóc sức khỏe",
-      "foods": "Thực phẩm",
-      "entertainment": "Giải trí"
-    }
+    "category": "Danh mục"
+  },
+  "categories": {
+    "shopping": "Mua sắm",
+    "healthcare": "Chăm sóc sức khỏe",
+    "foods": "Thực phẩm",
+    "entertainment": "Giải trí"
+  },
+  "budget": {
+    "month": "Tháng",
+    "year": "Năm",
+    "amount": "Số tiền",
+    "category":"Danh mục",
+    "placeholder": "Nhập số tiền...",
+    "name": "Ngân sách",
+    "initial": "Ban đầu",
+    "used": "Đã sử dụng"
   }
 }
 

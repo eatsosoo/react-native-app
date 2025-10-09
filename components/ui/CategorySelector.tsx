@@ -40,7 +40,8 @@ export function CategorySelector({ selectedCategory, onCategorySelect, categorie
                 style={[
                   styles.categoryText,
                   {
-                    color: isSelected ? theme.primaryForeground : theme.secondary
+                    color: isSelected ? theme.primaryForeground : theme.secondary,
+                    fontWeight: isSelected ? 'bold' : 'normal'
                   }
                 ]}
               >
@@ -73,6 +74,5 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     fontSize: 12,
-    fontWeight: '500',
   },
 });

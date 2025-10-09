@@ -7,7 +7,8 @@
   "tabs": {
     "home": "Home",
     "two": "Transactions",
-    "settings": "Settings"
+    "settings": "Settings",
+    "budget": "Budget"
   },
   "home": {
     "hello": "Hello",
@@ -41,13 +42,23 @@
     "amount": "Amount",
     "clear": "AC",
     "date": "Date",
+    "category": "Category"
+  },
+  "categories": {
+    "shopping": "Shopping",
+    "healthcare": "Healthcare",
+    "foods": "Foods",
+    "entertainment": "Entertainment"
+  },
+  "budget": {
+    "month": "Month",
+    "year": "Year",
+    "amount": "Amount",
     "category": "Category",
-    "categories": {
-      "shopping": "Shopping",
-      "healthcare": "Healthcare",
-      "foods": "Foods",
-      "entertainment": "Entertainment"
-    }
+    "placeholder": "Enter amount...",
+    "name": "Budget",
+    "initial": "Initial",
+    "used": "Used"
   }
 }
 

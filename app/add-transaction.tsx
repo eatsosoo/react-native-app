@@ -27,10 +27,10 @@ export default function AddTransactionScreen() {
   const tabs = [t('transaction.income'), t('transaction.expense')];
 
   const categories = [
-    { key: 'shopping' as Category, label: t('transaction.categories.shopping') },
-    { key: 'healthcare' as Category, label: t('transaction.categories.healthcare') },
-    { key: 'foods' as Category, label: t('transaction.categories.foods') },
-    { key: 'entertainment' as Category, label: t('transaction.categories.entertainment') },
+    { key: 'shopping' as Category, label: t('categories.shopping') },
+    { key: 'healthcare' as Category, label: t('categories.healthcare') },
+    { key: 'foods' as Category, label: t('categories.foods') },
+    { key: 'entertainment' as Category, label: t('categories.entertainment') },
   ];
 
   const handleKeyPress = (key: string) => {
@@ -121,7 +121,7 @@ export default function AddTransactionScreen() {
             ]}
             value={note}
             onChangeText={setNote}
-            placeholder={t('transaction.note')}
+            placeholder={t('transaction.note') + '...'}
             placeholderTextColor={theme.muted}
             multiline
             numberOfLines={3}

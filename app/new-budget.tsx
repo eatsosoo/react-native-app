@@ -1,24 +1,16 @@
 import Button from '@/components/ui/Button';
 import { Category, CategorySelector } from '@/components/ui/CategorySelector';
 import { useAppTheme } from '@/theme';
+import { useRouter } from 'expo-router';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Modal,
   View,
   Text,
   TextInput,
-  TouchableOpacity,
   StyleSheet,
-  Platform,
   Pressable,
 } from 'react-native';
-
-interface AddBudgetModalProps {
-  visible: boolean;
-  onCancel: () => void;
-  onSave?: (data: BudgetData) => void;
-}
 
 interface BudgetData {
   month: number; // 1-12
@@ -27,13 +19,12 @@ interface BudgetData {
   category: Category;
 }
 
-
-
 const currentDate = new Date();
 
-const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ visible, onCancel, onSave }) => {
+const AddBudgetModal: React.FC = () => {
   const { t } = useTranslation();
   const { theme } = useAppTheme();
+  const router = useRouter();
 
   const [month, setMonth] = useState<number>(currentDate.getMonth() + 1);
   const [year, setYear] = useState<number>(currentDate.getFullYear());
@@ -41,10 +32,10 @@ const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ visible, onCancel, onSa
   const [category, setCategory] = useState<Category>('shopping');
 
   const categories = [
-    { key: 'shopping' as Category, label: t('transaction.categories.shopping') },
-    { key: 'healthcare' as Category, label: t('transaction.categories.healthcare') },
-    { key: 'foods' as Category, label: t('transaction.categories.foods') },
-    { key: 'entertainment' as Category, label: t('transaction.categories.entertainment') },
+    { key: 'shopping' as Category, label: t('categories.shopping') },
+    { key: 'healthcare' as Category, label: t('categories.healthcare') },
+    { key: 'foods' as Category, label: t('categories.foods') },
+    { key: 'entertainment' as Category, label: t('categories.entertainment') },
   ];
 
   // For year picker: allow current year +/- 2 years
@@ -71,6 +62,10 @@ const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ visible, onCancel, onSa
     'December',
   ];
 
+  const handleCancel = () => {
+    router.back();
+  }
+
   const handleSave = () => {
     const data: BudgetData = {
       month,
@@ -79,8 +74,8 @@ const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ visible, onCancel, onSa
       category,
     };
     console.log('Budget Data:', data);
-    if (onSave) onSave(data);
-    onCancel(); // Close modal after saving
+    // if (onSave) onSave(data);
+    handleCancel(); // Close modal after saving
   };
 
   return (
@@ -89,7 +84,7 @@ const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ visible, onCancel, onSa
       {/* Month/Year Picker */}
       <View style={styles.row}>
         <View style={styles.pickerContainer}>
-          <Text style={[styles.label, { color: theme.text }]}>Month</Text>
+          <Text style={[styles.label, { color: theme.text }]}>{t('budget.month')}</Text>
           <View style={styles.picker}>
             {months.map((m, idx) => (
               <Pressable
@@ -100,13 +95,13 @@ const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ visible, onCancel, onSa
                 }]}
                 onPress={() => setMonth(idx + 1)}
               >
-                <Text style={[{ color: month === idx + 1 ? theme.primaryForeground : theme.secondary }]}>{m}</Text>
+                <Text style={[{ color: month === idx + 1 ? theme.primaryForeground : theme.secondary, fontWeight: month === idx + 1 ? '700' : '400' }]}>{m}</Text>
               </Pressable>
             ))}
           </View>
         </View>
         <View style={styles.pickerContainer}>
-          <Text style={[styles.label, { color: theme.text }]}>Year</Text>
+          <Text style={[styles.label, { color: theme.text }]}>{t('budget.year')}</Text>
           <View style={styles.picker}>
             {years.map((y) => (
               <Pressable
@@ -117,7 +112,7 @@ const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ visible, onCancel, onSa
                 }]}
                 onPress={() => setYear(y)}
               >
-                <Text style={[{ color: year === y ? theme.primaryForeground : theme.secondary }]}>{y}</Text>
+                <Text style={[{ color: year === y ? theme.primaryForeground : theme.secondary, fontWeight: year === y ? '700' : '400' }]}>{y}</Text>
               </Pressable>
             ))}
           </View>
@@ -126,16 +121,17 @@ const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ visible, onCancel, onSa
 
       {/* Amount Input */}
       <View style={styles.inputContainer}>
-        <Text style={[styles.label, { color: theme.text }]}>Amount</Text>
+        <Text style={[styles.label, { color: theme.text }]}>{t('budget.amount')}</Text>
         <TextInput
           style={[styles.input, {
             backgroundColor: theme.surface,
             borderColor: theme.border,
             color: theme.text,
           }]}
-          placeholder="Enter amount"
           value={amount}
           onChangeText={setAmount}
+          placeholder={t('budget.placeholder')}
+          placeholderTextColor={theme.muted}
           keyboardType="numeric"
           maxLength={10}
         />
@@ -143,7 +139,7 @@ const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ visible, onCancel, onSa
 
       {/* Category Selector */}
       <View style={styles.inputContainer}>
-        <Text style={[styles.label, { color: theme.text }]}>Category</Text>
+        <Text style={[styles.label, { color: theme.text }]}>{t('budget.category')}</Text>
         <CategorySelector
           selectedCategory={category}
           onCategorySelect={setCategory}
@@ -154,9 +150,9 @@ const AddBudgetModal: React.FC<AddBudgetModalProps> = ({ visible, onCancel, onSa
 
       {/* Buttons */}
       <View style={styles.buttonRow}>
-        <Button title='Cancel' style={styles.buttonItem} variant='ghost' onPress={onCancel} />
+        <Button title={t('common.cancel')} style={styles.buttonItem} variant='ghost' onPress={handleCancel} />
         <Button
-          title='Save'
+          title={t('common.ok')}
           style={styles.buttonItem}
           onPress={handleSave}
           disabled={!amount || isNaN(Number(amount))}
@@ -199,6 +195,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     margin: 2,
     alignItems: 'center',
+    fontWeight: 'bold'
   },
   pickerItemSelected: {
     backgroundColor: '#2e86de',
