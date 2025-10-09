@@ -2,7 +2,8 @@
   "common": {
     "ok": "Đồng ý",
     "cancel": "Hủy",
-    "back": "Quay lại"
+    "back": "Quay lại",
+    "close": "Đóng"
   },
   "tabs": {
     "home": "Trang chủ",

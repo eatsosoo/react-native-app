@@ -2,7 +2,8 @@
   "common": {
     "ok": "OK",
     "cancel": "Cancel",
-    "back": "Back"
+    "back": "Back",
+    "close": "Close"
   },
   "tabs": {
     "home": "Home",

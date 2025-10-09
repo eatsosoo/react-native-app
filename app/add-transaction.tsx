@@ -8,6 +8,7 @@ import { TabSwitcher } from '@/components/ui/TabSwitcher';
 import { NumericKeypad } from '@/components/ui/NumericKeypad';
 import { DatePicker } from '@/components/ui/DatePicker';
 import { CategorySelector, Category } from '@/components/ui/CategorySelector';
+import Button from '@/components/ui/Button';
 
 type TransactionType = 'income' | 'expense';
 
@@ -129,12 +130,12 @@ export default function AddTransactionScreen() {
         </View>
 
         {/* Date Picker */}
-        {/* <View style={styles.dateContainer}>
+        <View style={styles.dateContainer}>
           <Text style={[styles.dateLabel, { color: theme.text }]}>
             {t('transaction.date')}
           </Text>
           <DatePicker date={selectedDate} onDateChange={setSelectedDate} />
-        </View> */}
+        </View>
 
         {/* Category Selector */}
         <View style={styles.categoryContainer}>
@@ -153,15 +154,7 @@ export default function AddTransactionScreen() {
 
         {/* Save Button */}
         <View style={styles.saveContainer}>
-          <TouchableOpacity
-            style={[styles.saveButton, { backgroundColor: theme.primary }]}
-            onPress={handleSave}
-            activeOpacity={0.8}
-          >
-            <Text style={[styles.saveButtonText, { color: theme.primaryForeground }]}>
-              {t('common.ok')}
-            </Text>
-          </TouchableOpacity>
+          <Button title={t('common.ok')} onPress={handleSave} />
         </View>
     </View>
   );
@@ -204,7 +197,7 @@ const styles = StyleSheet.create({
   },
   dateContainer: {
     marginHorizontal: 20,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   dateLabel: {
     fontSize: 16,
@@ -222,7 +215,7 @@ const styles = StyleSheet.create({
   },
   saveContainer: {
     marginHorizontal: 20,
-    marginBottom: 10,
+    marginBottom: 30,
   },
   saveButton: {
     borderRadius: 12,

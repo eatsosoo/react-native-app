@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useAppTheme } from '@/theme';
+import { useTranslation } from 'react-i18next';
+import Button from './Button';
 
 interface DatePickerProps {
   date: Date;
@@ -9,6 +11,7 @@ interface DatePickerProps {
 }
 
 export function DatePicker({ date, onDateChange }: DatePickerProps) {
+  const { t } = useTranslation();
   const { theme } = useAppTheme();
   const [showPicker, setShowPicker] = useState(false);
 
@@ -21,9 +24,20 @@ export function DatePicker({ date, onDateChange }: DatePickerProps) {
   };
 
   const handleDateChange = (event: any, selectedDate?: Date) => {
-    setShowPicker(Platform.OS === 'ios');
-    if (selectedDate) {
-      onDateChange(selectedDate);
+    if (Platform.OS === 'ios') {
+      // On iOS, DateTimePicker stays open, so only close on cancel
+      if (event.type === 'set' && selectedDate) {
+        // setShowPicker(false);
+        onDateChange(selectedDate);
+      }
+      if (event.type === 'dismissed') {
+        setShowPicker(false);
+      }
+    } else {
+      // setShowPicker(false);
+      if (selectedDate) {
+        onDateChange(selectedDate);
+      }
     }
   };
 
@@ -48,31 +62,43 @@ export function DatePicker({ date, onDateChange }: DatePickerProps) {
         </Text>
       </TouchableOpacity>
 
+      {/* Modal for picker */}
       {showPicker && (
-        <DateTimePicker
-          value={date}
-          mode="date"
-          display={Platform.OS === 'ios' ? 'spinner' : 'default'}
-          onChange={handleDateChange}
-        />
+        <Modal
+          transparent
+          animationType="fade"
+          visible={showPicker}
+          onRequestClose={() => setShowPicker(false)}
+        >
+          <View style={styles.modalOverlay}>
+            <View style={[styles.modalContent, { backgroundColor: theme.surface }]}>
+              <DateTimePicker
+                value={date}
+                mode="date"
+                display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+                onChange={handleDateChange}
+                style={styles.picker}
+              />
+              <Button title={t('common.close')} onPress={() => setShowPicker(false)} />
+            </View>
+          </View>
+        </Modal>
       )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginHorizontal: 20,
-    marginBottom: 20,
-  },
+  container: {},
   dateButton: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 16,
-    borderRadius: 12,
+    justifyContent: 'space-between',
+    borderRadius: 8,
     borderWidth: 1,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    gap: 8,
   },
   dateText: {
     fontSize: 16,
@@ -80,5 +106,29 @@ const styles = StyleSheet.create({
   },
   calendarIcon: {
     fontSize: 18,
+    marginLeft: 6,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.25)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContent: {
+    width: '85%',
+    padding: 18,
+    borderRadius: 16,
+    alignItems: 'center',
+    elevation: 5,
+  },
+  picker: {
+    width: '100%',
+  },
+  closeBtn: {
+    marginTop: 18,
+    paddingHorizontal: 32,
+    paddingVertical: 10,
+    borderRadius: 10,
+    alignItems: 'center',
   },
 });
