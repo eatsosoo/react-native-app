@@ -1,25 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  Pressable,
-} from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { useAppTheme } from '@/theme';
 import { Category } from '@/components/ui/CategorySelector';
 import { useTranslation } from 'react-i18next';
+import Collapse from '@/components/ui/Collapse';
+import Separator from '@/components/ui/Separator';
+import Button from '@/components/ui/Button';
 
-const months = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-];
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const fakeBudgets: { category: Category; initialAmount: number; usedAmount: number }[] = [
   { category: 'shopping', initialAmount: 3000000, usedAmount: 1800000 },
   { category: 'foods', initialAmount: 3500000, usedAmount: 3700000 },
   { category: 'healthcare', initialAmount: 1000000, usedAmount: 500000 },
   { category: 'entertainment', initialAmount: 2000000, usedAmount: 2200000 },
+  { category: 'travel', initialAmount: 2000000, usedAmount: 65000 },
+  { category: 'learning', initialAmount: 2000000, usedAmount: 500000 },
+  { category: 'house', initialAmount: 2000000, usedAmount: 10000 },
 ];
 
 const getMonthYearOptions = () => {
@@ -38,15 +35,14 @@ const MonthlyBudgetScreen: React.FC = () => {
 
   const monthYearOptions = getMonthYearOptions();
   const currentIdx = monthYearOptions.findIndex(
-    m => m.month === new Date().getMonth() + 1 && m.year === new Date().getFullYear()
+    (m) => m.month === new Date().getMonth() + 1 && m.year === new Date().getFullYear(),
   );
   const [selectedIdx, setSelectedIdx] = useState(currentIdx);
 
   // For demo, budgets are fixed
   const budgets = fakeBudgets;
 
-  const getCategoryLabel = (cat: Category) =>
-    t(`categories.${cat}`);
+  const getCategoryLabel = (cat: Category) => cat.charAt(0).toUpperCase() + cat.slice(1);
 
   const selMonth = monthYearOptions[selectedIdx].month;
   const selYear = monthYearOptions[selectedIdx].year;
@@ -80,7 +76,9 @@ const MonthlyBudgetScreen: React.FC = () => {
             ]}
             onPress={() => setSelectedIdx(idx)}
           >
-            <Text style={{ color: idx === selectedIdx ? theme.primaryForeground : theme.text }}>
+            <Text
+              style={{ color: idx === selectedIdx ? theme.primaryForeground : theme.secondary }}
+            >
               {months[m.month - 1]} {m.year}
             </Text>
           </Pressable>
@@ -95,34 +93,68 @@ const MonthlyBudgetScreen: React.FC = () => {
           return (
             <View
               key={item.category}
-              style={[
-                styles.budgetBlock,
-                { backgroundColor: theme.surface, borderColor: overLimit ? theme.danger : theme.border },
-                overLimit && styles.budgetBlockOver,
-              ]}
+              style={[styles.budgetBlock, overLimit && styles.budgetBlockOver]}
             >
-              <Text style={[styles.categoryTitle, { color: theme.text }]}>
-                {getCategoryLabel(item.category)}
-              </Text>
-              <Text style={[styles.budgetAmount, { color: theme.secondary }]}>
-                {t('budget.initial')}: {item.initialAmount.toLocaleString()}
-              </Text>
-              <Text style={[styles.budgetAmount, { color: theme.secondary }]}>
-                {t('budget.used')}: {item.usedAmount.toLocaleString()}
-              </Text>
-              <View style={styles.progressBarContainer}>
-                <View style={[
-                  styles.progressBar,
-                  {
-                    width: `${percent * 100}%`,
-                    backgroundColor: overLimit ? theme.danger : theme.warning,
-                  },
-                ]} />
-                <View style={styles.progressBarBg} />
-              </View>
-              <Text style={[styles.percentText, { color: overLimit ? theme.danger : theme.muted }]}>
-                {((item.usedAmount / item.initialAmount) * 100).toFixed(1)}%
-              </Text>
+              <Collapse
+                title={getCategoryLabel(item.category)}
+                defaultExpanded={true}
+                borderColor={overLimit ? theme.danger : theme.border}
+              >
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'flex-end',
+                  }}
+                >
+                  <View>
+                    <Text style={[styles.budgetAmount, { color: theme.secondary }]}>
+                      {t('budget.initial')}: {item.initialAmount.toLocaleString()}
+                    </Text>
+                    <Text style={[styles.budgetAmount, { color: theme.secondary }]}>
+                      {t('budget.used')}: {item.usedAmount.toLocaleString()}
+                    </Text>
+                  </View>
+                  <View>
+                    <Text
+                      style={[
+                        styles.percentText,
+                        { color: overLimit ? theme.danger : theme.muted },
+                      ]}
+                    >
+                      {((item.usedAmount / item.initialAmount) * 100).toFixed(1)}%
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={styles.progressBarContainer}>
+                  <View
+                    style={[
+                      styles.progressBar,
+                      {
+                        width: `${percent * 100}%`,
+                        backgroundColor: overLimit ? theme.danger : theme.warning,
+                      },
+                    ]}
+                  />
+                  <View style={styles.progressBarBg} />
+                </View>
+
+                {overLimit ? (
+                  <View>
+                    <Separator />
+                    <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                      <Button
+                        title={t('common.edit')}
+                        variant="ghost"
+                        onPress={() => console.log('Edit')}
+                        style={{ width: 70, backgroundColor: theme.danger }}
+                        textStyle={{ color: theme.onDanger }}
+                      />
+                    </View>
+                  </View>
+                ) : null}
+              </Collapse>
             </View>
           );
         })}
@@ -139,6 +171,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   monthPickerContent: {
+    marginVertical: 16,
     alignItems: 'center',
     gap: 8,
   },
@@ -147,16 +180,17 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 18,
     marginHorizontal: 2,
+    height: 32,
     backgroundColor: '#f0f0f0',
   },
   budgetList: {
     paddingHorizontal: 16,
     paddingBottom: 32,
+    justifyContent: 'flex-start',
   },
   budgetBlock: {
-    borderWidth: 2,
+    // borderWidth: 2,
     borderRadius: 14,
-    padding: 16,
     marginBottom: 14,
   },
   budgetBlockOver: {

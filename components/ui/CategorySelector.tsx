@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import { useAppTheme } from '@/theme';
 
-export type Category = 'shopping' | 'healthcare' | 'foods' | 'entertainment';
+export type Category = 'shopping' | 'healthcare' | 'foods' | 'entertainment' | 'travel' | 'learning' | 'house';
 
 interface CategorySelectorProps {
   selectedCategory: Category | null;

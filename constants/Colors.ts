@@ -28,6 +28,7 @@ const light = {
   tint: base.black,
   tabIconDefault: base.grey400,
   tabIconSelected: base.black,
+  onDanger: base.white,
 };
 
 const dark = {
@@ -46,6 +47,7 @@ const dark = {
   tint: base.white,
   tabIconDefault: base.grey400,
   tabIconSelected: base.white,
+  onDanger: base.white,
 };
 
 export type AppTheme = typeof light;
