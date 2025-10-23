@@ -1,6 +1,7 @@
 {
   "common": {
     "ok": "Đồng ý",
+    "save": "Lưu",
     "cancel": "Hủy",
     "back": "Quay lại",
     "close": "Đóng",
@@ -73,6 +74,21 @@
     "name": "Ngân sách",
     "initial": "Ban đầu",
     "used": "Đã sử dụng"
+  },
+  "profile": {
+    "title": "Tài khoản",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "login": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "register": "Đăng ký",
+    "confirm_password": "Xác nhận mật khẩu",
+    "name": "Tên",
+    "phone": "Số điện thoại",
+    "dob": "Ngày sinh",
+    "joined": "Tham gia từ",
+    "change_password": "Đổi mật khẩu",
+    "edit_profile": "Cập nhật tài khoản"
   }
 }
 

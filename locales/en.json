@@ -1,6 +1,7 @@
 {
   "common": {
     "ok": "OK",
+    "save": "Save",
     "cancel": "Cancel",
     "back": "Back",
     "close": "Close",
@@ -73,6 +74,21 @@
     "name": "Budget",
     "initial": "Initial",
     "used": "Used"
+  },
+  "profile": {
+    "title": "Profile",
+    "email": "Email",
+    "password": "Password",
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "confirm_password": "Confirm password",
+    "name": "Name",
+    "phone": "Phone",
+    "dob": "Date of birthday",
+    "joined": "Joined",
+    "change_password": "Change Password",
+    "edit_profile": "Edit Profile"
   }
 }
 
