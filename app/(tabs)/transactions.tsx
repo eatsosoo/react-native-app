@@ -52,7 +52,7 @@ const FAKE_TRANSACTIONS: Transaction[] = [
     createdAt: new Date(2025, 9, 20, 14, 45),
     transactionDate: new Date(2025, 9, 20),
     category: 'entertainment',
-    title: 'Movie night',
+    title: 'Movie night Movie night Movie night Movie night',
     amount: 180000,
     type: 'expense',
   },
@@ -124,13 +124,14 @@ export default function TransactionsScreen() {
             {item.title}
           </Text>
           <Text style={[styles.meta, { color: theme.muted }]}>
-            {t('common.created_at')}: {formatDateTime(item.createdAt)}
-          </Text>
-          <Text style={[styles.meta, { color: theme.muted }]}>
             Date: {item.transactionDate.toLocaleDateString('vi-VN')}
           </Text>
           <Text style={[styles.meta, { color: theme.muted }]}>
             Category: {t(`categories.${item.category}`) ?? item.category}
+          </Text>
+
+          <Text style={[styles.meta, { color: theme.muted, marginTop: 8 }]}>
+            {formatDateTime(item.createdAt)}
           </Text>
         </View>
         <View style={styles.right}>
@@ -188,7 +189,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  headerTitle: { fontSize: 20, fontWeight: '700' },
   filterBtn: {
     paddingHorizontal: 8,
     paddingVertical: 4,
@@ -210,8 +210,8 @@ const styles = StyleSheet.create({
   },
   left: { flex: 1, paddingRight: 12 },
   right: { width: 110, alignItems: 'flex-end' },
-  title: { fontSize: 16, fontWeight: '700', marginBottom: 6 },
+  title: { fontSize: 14, fontWeight: '700', marginBottom: 6 },
   meta: { fontSize: 12 },
-  amount: { fontSize: 16, fontWeight: '700' },
+  amount: { fontSize: 16, fontWeight: '600' },
   empty: { padding: 24, alignItems: 'center' },
 });
