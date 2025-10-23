@@ -86,7 +86,7 @@ const MonthlyBudgetScreen: React.FC = () => {
       </ScrollView>
 
       {/* Budget Blocks */}
-      <ScrollView contentContainerStyle={styles.budgetList}>
+      <ScrollView style={{ flexGrow: 1 }} contentContainerStyle={styles.budgetList}>
         {budgets.map((item) => {
           const percent = Math.min(item.usedAmount / item.initialAmount, 1);
           const overLimit = item.usedAmount > item.initialAmount;
@@ -147,6 +147,7 @@ const MonthlyBudgetScreen: React.FC = () => {
                       <Button
                         title={t('common.edit')}
                         variant="ghost"
+                        size="small"
                         onPress={() => console.log('Edit')}
                         style={{ width: 70, backgroundColor: theme.danger }}
                         textStyle={{ color: theme.onDanger }}
@@ -169,6 +170,7 @@ const styles = StyleSheet.create({
   },
   monthPicker: {
     paddingHorizontal: 8,
+    flexGrow: 0,
   },
   monthPickerContent: {
     marginVertical: 16,
