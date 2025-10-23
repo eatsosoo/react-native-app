@@ -68,9 +68,9 @@ function RootLayoutNav() {
         <NavigationThemeProvider>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-            <Stack.Screen name="add-transaction" options={{ presentation: 'modal' }} />
-            <Stack.Screen name="new-budget" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="modal" options={{ presentation: 'modal', headerShown: false }} />
+            <Stack.Screen name="add-transaction" options={{ presentation: 'modal', headerShown: false }} />
+            <Stack.Screen name="new-budget" options={{ presentation: 'modal', headerShown: false }} />
           </Stack>
         </NavigationThemeProvider>
       </TransactionProvider>

@@ -4,7 +4,19 @@
     "cancel": "Hủy",
     "back": "Quay lại",
     "close": "Đóng",
-    "edit": "Sửa"
+    "edit": "Sửa",
+    "clear": "Xóa",
+    "delete": "Xoá",
+    "filter": "Bộ lọc",
+    "apply": "Áp dụng",
+    "all": "Tất cả",
+    "expense": "Chi tiêu",
+    "income": "Thu nhập",
+    "start": "Bắt đầu",
+    "end": "Kết thúc",
+    "category":"Danh mục",
+    "type": "Loại",
+    "created_at": "Ngày tạo"
   },
   "tabs": {
     "home": "Trang chủ",

@@ -4,7 +4,19 @@
     "cancel": "Cancel",
     "back": "Back",
     "close": "Close",
-    "edit": "Edit"
+    "edit": "Edit",
+    "clear": "Clear",
+    "delete": "Delete",
+    "filter": "Filter",
+    "apply": "Apply",
+    "all": "All",
+    "expense": "Expense",
+    "income": "Income",
+    "start": "Start",
+    "end": "End",
+    "category":"Category",
+    "type": "Type",
+    "created_at": "Created At"
   },
   "tabs": {
     "home": "Home",

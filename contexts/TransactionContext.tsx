@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Category } from '@/components/ui/CategorySelector';
 
 export interface Transaction {
   id: string;
@@ -7,7 +8,7 @@ export interface Transaction {
   amount: number;
   note: string;
   date: Date;
-  category?: 'shopping' | 'healthcare' | 'foods' | 'entertainment' | null;
+  category?: Category | null;
 }
 
 interface TransactionContextValue {
